@@ -1,0 +1,111 @@
+.ah-card {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+  }
+  body {
+    background-image: url('https://st4.depositphotos.com/3930503/25520/i/450/depositphotos_255205370-stock-photo-red-abstract-digital-wallpaper.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+h1 {
+    color: rgb(0, 0, 0);
+    text-align:center;
+    font-family: 'Times New Roman', serif;
+    font-style:calc(70);
+}
+p {
+    color:black;
+    text-align:start;
+    backface-visibility: calc(3);  
+}
+
+h2 {
+  color: black;
+  text-shadow: 10px 10px 4px rgba(0, 0, 0, 0.7);
+}
+  
+.content-wrapper {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  height: 15vh;         
+  justify-content: flex-start; 
+}
+
+.centered-text {
+  text-align: center;
+  margin-top: 20px; 
+}
+
+
+footer p {
+  margin: 0; 
+  color: #fff; 
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+.card-list { 
+  display: flex; 
+  flex-wrap: wrap;
+   gap: 20px; 
+   justify-content:
+    center;
+} 
+.card {
+   width: 
+   18rem; margin:
+    10px; 
+} /* Flexbox to push footer to bottom */
+body { 
+  display: flex; 
+  flex-direction: column;
+   min-height: 100vh;
+}
+main {
+   flex: 1;
+} 
+footer {
+   background-color: #000;
+    color: #fff;
+     text-align: center;
+      padding: 0px 0;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header, footer {
+  background-color: #000;
+  color: #fff;
+}
+
+main {
+  flex: 1;
+}
+
+.card {
+  margin: auto;
+  max-width: 600px;
+}
+
+.media-container {
+  margin-bottom: 15px;
+  text-align: center;
+}

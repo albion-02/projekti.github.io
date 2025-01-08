@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Prices</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .card-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .card {
+            width: 18rem;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Limited Edition Hypercars</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>                                          
+                        <li class="nav-item"><a class="nav-link" href="GasolineHypercars.html">Gasoline Hypercars</a></li>
+                        <li class="nav-item"><a class="nav-link" href="FullyElectricHypercars.html">Fully Electric Hypercars</a></li>
+                        <li class="nav-item"><a class="nav-link" href="HybridHypercars.html">Hybrid Hypercars</a></li>
+                        <li class="nav-item"><a class="nav-link" href="prices.html">Prices</a></li>                                               
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>                       
+                        <li class="nav-item"><a class="nav-link" href="DevelopersFavourite.html">Developers Favourite</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Statistics.html">Statistics</a></li>
+                        <li class="nav-item"><a class="nav-link" href="brands.html">Brands</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-4">
+        <h1 class="text-center">Car Prices</h1>
+        <p class="text-center">Enter your budget, and we'll tell you which cars you can afford!</p>
+
+        <div class="form-group text-center">
+            <label for="budget">Enter your budget (in EURO):</label>
+            <input type="number" id="budget" class="form-control w-50 mx-auto" placeholder="Enter your budget">
+            <button class="btn btn-primary mt-3" onclick="checkAffordableCars()">Check Affordable Cars</button>
+        </div>
+
+        <div id="affordableCars" class="card-list"></div>
+    </main>
+
+
+    <script>
+        // Car data with their prices
+        const cars = [
+            {
+                name: "Mercedes-AMG One",
+                price: 2750000,
+                img: "https://www.mercedes-amg.com/content/amg-pl/en/home/vehicles/amg-one/hypercar/jcr:content/root/responsivegrid/threeimagegallery/image1.media6.responsive_8col_4_3.1683102355779.jpeg",
+                url: "https://www.mercedes-amg.com/en/home/vehicles/amg-one/hypercar.html"
+            },
+            {
+                name: "Porsche 918 Spyder",
+                price: 845000,
+                img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEEAsJg_mC0HI_FtEr9P_ZVCyVGhga0CiFnkz-2eOCXMDyTzh6V267S37BivBR87scylFv5ho8jaWSSEsN-dLwpxDMz0xdYrq026JUiGQFyxli7zkznmuwwlysMEku7SO-6w7js6CHnZOB/s1600/porsche-918-spyder+(7).jpg",
+                url: "https://www.porsche.com/stories/innovation/how-much-is-a-porsche-918-spyder/"
+            },
+            {
+                name: "Ferrari LaFerrari Aperta",
+                price: 2400000,
+                img: "https://ferrari-view.thron.com/api/xcontents/resources/delivery/getThumbnail/ferrari/1920x1080/1d1d774e-5bc4-4321-8729-301cc3d12ddf.jpg?v=116",
+                url: "https://www.ferrari.com/en-EN/auto/laferrari-aperta"
+            },
+            {
+                name: "Bugatti Divo",
+                price: 5000000,
+                img: "https://d2ox13tjqpxop5.cloudfront.net/BUGATTI-2023/Bugatti-Models/Divo/Gallery/05.jpeg",
+                url: "https://www.bugatti.com/the-bugatti-models/coachbuilding/divo/"
+            },
+            {
+                name: "McLaren Speedtail",
+                price: 2100000,
+                img: "https://mclaren.scene7.com/is/image/mclaren/Speedtail%20Florida%202390_1920x1050-1:crop-16x9?wid=1786&hei=1005",
+                url: "https://cars.mclaren.com/en/ultimate-models/mclaren-speedtail"
+            },
+            {
+                name: "Lamborghini Veneno",
+                price: 4500000,
+                img: "https://www.secret-classics.com/wp-content/uploads/2021/11/LamborghiniVeneno_2.jpg",
+                url: "https://www.lamborghini.com/en-en/history/veneno-roadster"
+            },
+            {
+                name: "Pagani Huayra BC",
+                price: 2800000,
+                img: "https://www.paganiofgreenwich.com/wp-content/uploads/2020/01/huayra_bc_main.jpg",
+                url: "https://www.pagani.com/huayra-bc/"
+            },
+            {
+                name: "Koenigsegg Jesko",
+                price: 3000000,
+                img: "https://koenigsegg-cdn-g7eehhd6f0ewcaff.z02.azurefd.net/drupal/styles/autox720/azure/2022-04/Pre-series%20Jesko%201.jpg?itok=IlUJvQkV",
+                url: "https://www.koenigsegg.com/model/jesko-attack"
+            },
+            {
+                name: "Hennessey Venom F5",
+                price: 2700000,
+                img: "https://hpe-photos.s3.us-east-2.amazonaws.com/wp-content/uploads/2024/08/New-Venom-F5-Stealth-Series-Celebrates-Extreme-Personalization-Low-1-1.jpg",
+                url: "https://www.hennesseyspecialvehicles.com/"
+            },
+            {
+                name: "Rimac C_Two",
+                price: 2000000,
+                img: "https://web-cdn.rimac-automobili.com/wp-content/uploads/2021/05/31101405/intro_slider_07_optimised-2160x1215.jpg",
+                url: "https://www.rimac-automobili.com/nevera/"
+            },
+            {
+                name: "SSC Tuatara",
+                price: 1500000,
+                img: "https://assets.newatlas.com/dims4/default/5a0a0bc/2147483647/strip/true/crop/4240x2832+0+0/resize/1920x1283!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2F3e%2F65%2F9b5dc8b74e2c91971a16ecc5f032%2F5e3b44a60aeb122e45fbf8b0-tuatara-08.jpg",
+                url: "https://www.sscnorthamerica.com/model/tuatara"
+            },
+            {
+                name: "Zenvo TSR-S",
+                price: 1500000,
+                img: "https://zenvoautomotive.com/wp-content/uploads/2023/08/TSR_S_Front34_Web.jpg",
+                url: "https://zenvoautomotive.com/cars/tsr-s/"
+            },
+            {
+                name: "Pininfarina Battista",
+                price: 2250000,
+                img: "https://media.cnn.com/api/v1/images/stellar/prod/190312173319-pininfarina-battista-top.jpg?q=w_5186,h_2918,x_0,y_0,c_fill",
+                url: "https://www.automobili-pininfarina.com/battista"
+            },
+            {
+                name: "Lotus Evija",
+                price: 2300000,
+                img: "https://wlt-p-001.sitecorecontenthub.cloud/api/public/content/56a79c994725446cb5cba1d0ec4bc395?v=ea19bc34",
+                url: "https://www.lotuscars.com/en-US/evija"
+            },
+            {
+                name: "Koenigsegg Regera",
+                price: 2300000,
+                img: "https://i.redd.it/kszef1v9vzeb1.jpg",
+                url: "https://www.koenigsegg.com/model/regera"
+            },
+        ];
+
+        function checkAffordableCars() {
+            const budget = parseInt(document.getElementById("budget").value);
+            const affordableCars = cars.filter(car => car.price <= budget);
+            const affordableCarsContainer = document.getElementById("affordableCars");
+            affordableCarsContainer.innerHTML = ""; // Clear the previous results
+
+            if (affordableCars.length === 0) {
+                affordableCarsContainer.innerHTML = "<p class='text-center'>Sorry, no cars available within your budget.</p>";
+            } else {
+                affordableCars.forEach(car => {
+                    const carCard = document.createElement("div");
+                    carCard.classList.add("card");
+                    carCard.innerHTML = `
+                        <img src="${car.img}" class="card-img-top" alt="${car.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${car.name}</h5>
+                            <p class="card-text">Price: $${car.price.toLocaleString()}</p>
+                            <a href="${car.url}" class="btn btn-primary" target="_blank">Learn More</a>
+                        </div>
+                    `;
+                    affordableCarsContainer.appendChild(carCard);
+                });
+            }
+        }
+    </script>
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; These Hypercars are The Developers Favourite. All Rights Reserved.   A.H</p>
+        
+    </footer>
+</body>
+</html>
